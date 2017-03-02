@@ -453,13 +453,17 @@ const hashingFunctions = (function () {
   return methods;
 })();
 
-var SHA3 = function() {
+const SHA3 = function() {
     this.evaluate = function() {
-        return hashingFunctions[this.alg](this.data);
+        if(this.alg.indexOf('shake') === 0) {
+          return hashingFunctions[this.alg](this.data, this.shakeBits);
+        } else {
+          return hashingFunctions[this.alg](this.data);
+        }
     }
 }
 
-SHA3.identifier = "io.vito.paw-sha3-digest";
+SHA3.identifier = "io.vito.pawextensions.sha3";
 SHA3.title = "SHA3 Digest";
 SHA3.inputs = [
     DynamicValueInput("data", "Input", "String"),
@@ -476,6 +480,9 @@ SHA3.inputs = [
             "shake_128": "Shake-128",
             "shake_256": "Shake-256"
         }
+    }),
+    DynamicValueInput("shakeBits", "Shake Output Lenght", "Number", {
+      defaultValue: 128
     })
 ];
 registerDynamicValueClass(SHA3);
