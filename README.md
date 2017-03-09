@@ -11,6 +11,9 @@ algorithms. Supported algorithms are:
  - Keccak-224
  - Shake-128
  - Shake-256
+ 
+## Installing
+You can either get it from the [Paw Extensions page](https://paw.cloud/extensions/sha3) :sparkles:
 
 ## License
 
